@@ -6,15 +6,15 @@ class GildedRoseTest extends FunSpec with BeforeAndAfterEach {
 
 
   // Initialize reassignable variables and mutable objects.
-  var regular, agedBrie, sulfuras, backstage, conjured: Item = null
-  var rose: GildedRose = null
+  var regular, agedBrie, sulfuras, backstage, conjured: Item = _
+  var rose: GildedRose = _
 
-  override def beforeEach() = {
-    regular = new Item("regular", 5, 5)
-    agedBrie = new Item("Aged Brie", 10, 10)
-    sulfuras = new Item("Sulfuras, Hand of Ragnaros", 20, 80)
-    backstage = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 8)
-    conjured = new Item("conjured", 10, 10)
+  override def beforeEach(): Unit = {
+    regular = Item("regular", 5, 5)
+    agedBrie = Item("Aged Brie", 10, 10)
+    sulfuras = Item("Sulfuras, Hand of Ragnaros", 20, 80)
+    backstage = Item("Backstage passes to a TAFKAL80ETC concert", 11, 8)
+    conjured = Item("conjured", 10, 10)
 
     rose = new GildedRose(Array(regular, agedBrie, sulfuras, backstage, conjured))
   }
