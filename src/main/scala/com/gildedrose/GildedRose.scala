@@ -5,7 +5,7 @@ package com.gildedrose
   *
   * @param items Array with items.
   */
-class GildedRose(val items: Array[Item]) {
+class GildedRose(val items: Array[Item]){
 
 
   val maxQuality = 50
@@ -27,7 +27,10 @@ class GildedRose(val items: Array[Item]) {
 
   /**
     * Refactored original function to update quality on items.
-    */
+
+
+
+
   def updateQuality(): Unit = {
 
     items.foreach {
@@ -65,8 +68,14 @@ class GildedRose(val items: Array[Item]) {
       case _ =>
     }
   }
+    */
 
+  def updateQuality() = {
+    items.map(item => {
+      ItemWithBehaviour.create(item)
+    }).foreach(itemWithBehaviour => {
+      itemWithBehaviour.update()
+    })
+  }
 }
-
-
 
