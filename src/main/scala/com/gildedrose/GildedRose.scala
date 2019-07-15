@@ -7,6 +7,11 @@ package com.gildedrose
   */
 class GildedRose(val items: Array[Item]) {
 
+
+  val maxQuality = 50
+  val tenDaysSellin = 10
+  val fiveDaysSellin = 5
+
   /**
     * @param item        The item to be checked.
     * @param updateValue The quality update value.
@@ -27,35 +32,34 @@ class GildedRose(val items: Array[Item]) {
 
     items.foreach {
       case item@Item("Sulfuras, Hand of Ragnaros", _, _) =>
-      case item@Item("Aged Brie", sellIn, quality) if quality <= 50 & sellIn >= 0 =>
+      case item@Item("Aged Brie", sellIn, quality) if (quality <= maxQuality && sellIn >= 0) =>
         item.sellIn -= 1
-        //item.quality += 1
-        setMaxQuality(item, 1, 50)
-      case item@Item("Aged Brie", sellIn, quality) if quality <= 50 & sellIn < 0 =>
+        setMaxQuality(item, 1, maxQuality)
+      case item@Item("Aged Brie", sellIn, quality) if (quality <= maxQuality && sellIn < 0) =>
         item.sellIn -= 1
-        setMaxQuality(item, 2, 50)
-      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) if quality < 50 && sellIn > 10 =>
+        setMaxQuality(item, 2, maxQuality)
+      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) if (quality <= maxQuality && sellIn > tenDaysSellin) =>
         item.sellIn -= 1
-        setMaxQuality(item, 1, 50)
-      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) if quality < 50 && sellIn > 5 =>
+        setMaxQuality(item, 1, maxQuality)
+      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) if (quality <= maxQuality && sellIn > fiveDaysSellin) =>
         item.sellIn -= 1
-        setMaxQuality(item, 2, 50)
-      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) if quality < 50 && sellIn > 0 =>
+        setMaxQuality(item, 2, maxQuality)
+      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) if (quality <= maxQuality && sellIn >= 0) =>
         item.sellIn -= 1
-        setMaxQuality(item, 3, 50)
-      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, _) if sellIn <= 0 =>
+        setMaxQuality(item, 3, maxQuality)
+      case item@Item("Backstage passes to a TAFKAL80ETC concert", sellIn, _) if sellIn < 0 =>
         item.sellIn -= 1
         item.quality = 0
-      case item@Item("conjured", sellIn, quality) if quality > 0 && sellIn > 0 =>
+      case item@Item("conjured", sellIn, quality) if (quality > 0 && sellIn >= 0) =>
         item.sellIn -= 1
         item.quality -= 2
-      case item@Item("conjured", sellIn, quality) if quality > 0 && sellIn <= 0 =>
+      case item@Item("conjured", sellIn, quality) if (quality > 0 && sellIn < 0) =>
         item.sellIn -= 1
         item.quality -= 4
-      case item@Item(_, sellIn, quality) if sellIn > 0 && quality > 0 =>
+      case item@Item(_, sellIn, quality) if (quality > 0 && sellIn >= 0) =>
         item.sellIn -= 1
         item.quality -= 1
-      case item@Item(_, sellIn, quality) if sellIn <= 0 && quality > 0 =>
+      case item@Item(_, sellIn, quality) if (quality > 0 && sellIn < 0) =>
         item.sellIn -= 1
         item.quality -= 2
       case _ =>
@@ -63,4 +67,6 @@ class GildedRose(val items: Array[Item]) {
   }
 
 }
+
+
 

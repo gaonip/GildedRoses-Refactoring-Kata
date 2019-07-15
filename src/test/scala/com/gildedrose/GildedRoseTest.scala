@@ -41,7 +41,7 @@ class GildedRoseTest extends FunSpec with BeforeAndAfterEach {
     }
 
     it("should degrade twice as fast once sellIn has passed") {
-      regular.sellIn = 0
+      regular.sellIn = -1
       rose.updateQuality()
       assert(regular.quality == 3)
     }
@@ -91,8 +91,8 @@ class GildedRoseTest extends FunSpec with BeforeAndAfterEach {
       assert(backstage.quality == 11)
     }
 
-    it("should make sure backstage pass quality drops to 0 when the sellIn value reaches 0") {
-      backstage.sellIn = 0
+    it("should make sure backstage pass quality drops to 0 when the sellIn value passes 0") {
+      backstage.sellIn = -1
       rose.updateQuality()
       assert(backstage.quality == 0)
     }
@@ -103,7 +103,7 @@ class GildedRoseTest extends FunSpec with BeforeAndAfterEach {
     }
 
     it("should make sure conjured items degrade twice as fast (-2 -2) if sellIn <0)") {
-      conjured.sellIn = 0
+      conjured.sellIn = -1
       rose.updateQuality()
       assert(conjured.quality == 6)
     }
